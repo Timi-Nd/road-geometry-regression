@@ -1,0 +1,4 @@
+#!/bin/bash
+# Compile the C++ regression module once when the Binder image is built.
+set -e
+python setup.py build_ext --inplace
