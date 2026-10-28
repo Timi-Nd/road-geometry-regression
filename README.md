@@ -31,11 +31,7 @@ Fitted on 80% of the 25,415 segments and scored on the 20% held out (seed 42):
 | Line with intercept | 146.8 | 233.5 | 0.9953 |
 | Line through the origin | 135.0 | 263.0 | 0.9940 |
 
-<<<<<<< HEAD
 The two measurements are almost perfectly linearly related. Similar train and test scores on a random row split do not establish generalization to unseen highways. The slope of about 1,777 per km may reflect Web Mercator distortion, but the target's units and CRS have not been confirmed. Full details are in [results/findings.md](results/findings.md).
-=======
-The two measurements are almost perfectly linearly related, and train and test scores match, so the model is not overfitted. The data indicate `Shape__Length` is measured in Web Mercator units, which are stretched by `1 / cos(latitude)` (about 1.6 at 52°N). That finding is inferred from the geometry, not confirmed from the source's metadata. Full details are in [results/findings.md](results/findings.md).
->>>>>>> 14b376aa6decca357e0c005dcc3fb87f22f09a0c
 
 This is a regression exercise on two length measurements. It does not predict road deterioration, safety, traffic or maintenance.
 
