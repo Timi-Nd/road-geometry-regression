@@ -1,0 +1,96 @@
+{
+  "dataset_sha256": "97897e1c149900e28e0fe6b7e9d976f10200fc81096a2042a87b6aa63dca9313",
+  "config_sha256": "53d7fba06ded322870d9b78538fe8fb4d84859ffc88d7f7f74f719ca08379537",
+  "config": {
+    "target": "Shape__Length",
+    "features": [
+      "SEGMENT_LENGTH_KM",
+      "SPEEDLIMIT"
+    ],
+    "seed": 2027,
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2,
+    "rank_tolerance": 1e-12,
+    "interval_quantile": 0.9
+  },
+  "quality": {
+    "input_rows": 25415,
+    "missing_target": 0,
+    "invalid_nonblank_target": 0,
+    "eligible_known": 25258,
+    "ineligible_known_or_invalid": 157,
+    "missing_with_valid_predictors": 0,
+    "missing_with_invalid_predictors_or_ids": 0
+  },
+  "validation": {
+    "regression": {
+      "n": 5034,
+      "mae": 101.56443269567232,
+      "rmse": 244.05940775697843,
+      "r2": 0.9962504916600076,
+      "residual_mean": -4.801072888654052,
+      "residual_median": 18.09857443643709,
+      "residual_p05": -256.1338879489826,
+      "residual_p95": 146.25614876049346,
+      "residual_max_abs": 11713.047028473287
+    },
+    "median": {
+      "n": 5034,
+      "mae": 1426.0797751102427,
+      "rmse": 4067.4626644942405,
+      "r2": -0.04143068146906259,
+      "residual_mean": 811.2774964445485,
+      "residual_median": 5.258942849999926,
+      "residual_p05": -854.9461706325001,
+      "residual_p95": 4205.838162949997,
+      "residual_max_abs": 186425.34795234998
+    },
+    "median_value": 895.0202476500001,
+    "interval_radius": 166.3019209573777,
+    "interval_empirical_coverage": 0.8756456098529996,
+    "interval_mean_width": 332.6038419147554,
+    "model": {
+      "intercept": 96.65617444697669,
+      "coefficients": {
+        "SEGMENT_LENGTH_KM": 1743.178995139949,
+        "SPEEDLIMIT": -2.6529598374747145
+      }
+    },
+    "partition_counts": {
+      "train": 15156,
+      "validation": 5068,
+      "test": 5034
+    },
+    "identifier_overlaps": {
+      "ROADNAME": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "NID": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      }
+    }
+  },
+  "final_imputation_model": {
+    "model": {
+      "intercept": 107.74568810068642,
+      "coefficients": {
+        "SEGMENT_LENGTH_KM": 1756.3087446981822,
+        "SPEEDLIMIT": -2.974635345902456
+      }
+    },
+    "training_rows": 20190,
+    "calibration_rows": 5068,
+    "interval_radius": 184.77690632951723,
+    "imputed_rows": 0
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.4.4",
+    "pandas": "3.0.1"
+  },
+  "interval_method": "Symmetric empirical calibration absolute-residual quantile; not a guaranteed prediction interval."
+}

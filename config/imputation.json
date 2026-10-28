@@ -1,0 +1,9 @@
+{
+  "target": "Shape__Length",
+  "features": ["SEGMENT_LENGTH_KM", "SPEEDLIMIT"],
+  "seed": 2027,
+  "train_fraction": 0.6,
+  "validation_fraction": 0.2,
+  "rank_tolerance": 1e-12,
+  "interval_quantile": 0.9
+}

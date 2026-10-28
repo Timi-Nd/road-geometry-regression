@@ -7,6 +7,8 @@
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
 
+#include "multiple_regression_bindings.h"
+
 #include <cmath>
 #include <cstddef>
 #include <limits>
@@ -176,9 +178,12 @@ double r2(const Array& actual_in, const Array& pred_in) {
 
 }  // namespace
 
-// Python bindings: each m.def exposes one C++ function under the given name.
+// This macro defines the entry point Python calls when importing regression_cpp.
+// Each m.def registers a C++ function under a Python name. The separate
+// binding function also registers the multiple-regression model in this module.
 PYBIND11_MODULE(regression_cpp, m) {
-    m.doc() = "C++ implementation of simple linear regression mathematics";
+    m.doc() = "C++ implementation of linear regression mathematics";
+    bind_multiple_regression(m);
     m.def("fit_ols", &fit_ols, py::arg("x"), py::arg("y"),
           "Return (intercept, slope) from ordinary least squares with an intercept.");
     m.def("fit_through_origin", &fit_through_origin, py::arg("x"), py::arg("y"),

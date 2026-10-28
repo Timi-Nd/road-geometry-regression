@@ -7,13 +7,15 @@
 
 > **What this document is:** A reconstruction of the documented workflow, checked against the saved workbook, exported CSV, and the Ministry's original shapefile. It is **not** a claim that we possess the complete original ETL script or its execution logs. Exact source-download settings, any unpublished intermediate code, and the source layer's effective date require further documentation.
 
-> **Local project access:** The analysis uses the `data/road_segments.csv` file in this repository; no other access is required.
+> **Dataset included here:** The analysis uses `data/road_segments.csv`, a project-prepared snapshot assembled from multiple sources for learning and exploration. The original Ministry-supplied archive and shapefile are **not included** in this repository. The preparation described below includes surface attributes derived from that source.
+
+> **Reuse:** The source terms and permissions applicable to sharing this prepared snapshot, including derived attributes, have not been confirmed; an educational purpose alone does not establish them.
 
 ## 1. Why we built this dataset
 
 The research started with a practical question: *Why do some Saskatchewan roads deteriorate faster than others, and can we predict when they will need maintenance?*
 
-Our longer-term plan is to explore historical road condition, traffic volumes and heavy-truck loading, maintenance history, road structure and materials, climate and freeze–thaw conditions, drainage, soil, and population/development patterns. Ultimately, we want to assess whether a model could estimate maintenance needs **1, 3, and 5 years** ahead and, later, support resource planning.
+The original research motivation included historical road condition, traffic, maintenance and environmental factors, and the possibility of estimating maintenance needs **1, 3, and 5 years** ahead. This showcase does not make those predictions.
 
 The present `01_Road_Segments` dataset is the **road-network and surface-type foundation** for that research. It is **not yet** a longitudinal pavement-condition dataset, and it does **not** contain verified maintenance outcomes sufficient to train the intended deterioration model.
 
@@ -24,7 +26,7 @@ The original project reflection is not included as a linked external resource; t
 | Source | Origin | What it provides | Status |
 |---|---|---|---|
 | **`HIGHWAY_OFFICIAL`** | Government of Saskatchewan / Saskatchewan GeoHub | Provincial/national highway segments, kilometer references, road identifiers, attributes and geometry | Imported as the foundation |
-| **`highways_surfType.zip`** | Saskatchewan Ministry of Highways; sent directly in response to a data request, **14 Oct 2026** | GIS line features with official highway surface classes and kilometre intervals | Integrated **21 Oct 2026** |
+| **`highways_surfType.zip`** | Saskatchewan Ministry of Highways; sent directly in response to a data request, **14 Oct 2026** | GIS line features with official highway surface classes and kilometre intervals | Used in preparation **21 Oct 2026**; original archive not included |
 | Official surface-type map and public metadata | Government of Saskatchewan | Surface-class definitions and background documentation | Reference material |
 | Original working workbook | Our working data preparation | Formula-linked cleaned records, mapping decisions, integration QA | Preserved separately; not needed to use the project CSV |
 
@@ -226,7 +228,7 @@ Those **388 are included in the 25,033 accepted Ministry matches**; they are not
 - The network includes repeated `NID` values. Use a suitable composite ID for analysis and joins.
 - The first geographic spot checks of matched roads were encouraging; they **do not** replace exhaustive GIS overlay QA for the whole province.
 - Some of the 350 `INCOMPLETE_OR_MIXED` records have essentially full overall coverage but contain **more than one surface type**. These should be **split into homogeneous sections or retained as mixed**, rather than assigned their dominant class without review.
-- Exact survey/effective date, original survey methodology, and permissions for redistribution of the Ministry-supplied file still need confirmation.
+- Exact survey/effective date, original survey methodology, and source terms applicable to sharing the prepared dataset and its derived attributes remain unconfirmed.
 
 ## 8. Project data file
 
@@ -261,23 +263,25 @@ print("Snapshot integrity checks passed.")
 
 For a **full re-run** from raw sources, an independent processing script must additionally read the source shapefile, implement interval matching and boundary handling, record which GIS feature(s) contribute to each match, and compare its output against the 33-column snapshot. This audit snippet **checks** the export; it does not recreate the integration.
 
-## 10. What is left before predictive modelling
+## 10. Scope and data limitations
 
-1. **Resolve 380 surface records:** inspect 350 mixed/incomplete overlaps, including likely class-transition segments, and 30 without a reliable Ministry match. Re-segmentation may be preferable to forcing one surface type.
-2. **Confirm the Ministry layer's effective/reference date**, not just the ZIP timestamps or email receipt date.
-3. **Obtain road-condition history** (e.g., IRI, rutting, cracking, pavement-condition assessments), **maintenance/rehabilitation events**, and **historic AADT/truck volumes**, with dates and highway-kilometre references. A follow-up request was sent to the Ministry on 21 Oct 2026.
-4. **Add time-aware environmental and growth data** (weather, freeze–thaw, drainage/soil, population/development), preserving where/when observations were measured.
-5. Define training **outcomes and leakage-safe temporal splits** only once suitable historical condition/repair records exist. Surface class alone cannot tell us when a road will fail.
-6. Maintain source versions, effective dates, field definitions, join scripts and QA summaries as the dataset evolves.
+- The snapshot retains 350 mixed/incomplete surface overlaps and 30 records
+  without a reliable Ministry match. The Ministry layer's effective date is
+  unconfirmed.
+- Dated condition, maintenance, traffic and environmental histories are not
+  part of this snapshot. Surface class alone cannot establish when a road
+  will fail, and the regression showcase does not predict deterioration.
+- Source versions, effective dates, field definitions, join scripts and
+  exhaustive GIS quality assurance are not all available for this export.
 
 ## 11. Files and provenance references
 
 - **Project dataset:** `data/road_segments.csv` (created 21 Oct 2026; included in this project)
 - **Methodology document:** `docs/road_segments_methodology.md`
-- **Ministry source archive:** `highways_surfType.zip` (received directly; not linked here)
+- **Ministry source archive:** `highways_surfType.zip` (received directly; not included in this repository)
 - **Integration audit and review files:** retained as separate provenance materials; not required to access or analyze the project CSV.
 - **Government base-network description:** [HIGHWAY_OFFICIAL public catalogue](https://open.canada.ca/data/en/dataset/988a8b95-fa49-adc8-bbe7-6e69bb26099c)
 
 ---
 
-**Bottom line:** `01_Road_Segments` is a reproducible, traceable **Saskatchewan provincial highway inventory with Ministry-priority surface-type enrichment**, excellent for exploration and downstream joins, but not yet a historical deterioration-prediction training set.
+**Bottom line:** `01_Road_Segments` is a documented **Saskatchewan provincial highway inventory with Ministry-priority surface-type enrichment**. The exported snapshot can be audited, but the original integration cannot be fully reproduced from the retained materials; it is not a historical deterioration-prediction training set.

@@ -1,0 +1,389 @@
+{
+  "dataset_sha256": "97897e1c149900e28e0fe6b7e9d976f10200fc81096a2042a87b6aa63dca9313",
+  "config_sha256": "fea6dfa0c13fb8e0e2def3cfe0c4ee6c87ced99d271aa4bd62e4e89fa8879f4c",
+  "config": {
+    "seed": 42,
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2,
+    "rank_tolerance": 1e-12,
+    "timing_repetitions": 5,
+    "models": {
+      "A": [
+        "SEGMENT_LENGTH_KM"
+      ],
+      "B": [
+        "SEGMENT_LENGTH_KM",
+        "SPEEDLIMIT"
+      ],
+      "C": [
+        "SEGMENT_LENGTH_KM",
+        "SPEEDLIMIT",
+        "NBRLANES"
+      ]
+    }
+  },
+  "quality": {
+    "input_rows": 25415,
+    "nonfinite_or_nonnumeric": 0,
+    "missing_identifiers": 0,
+    "nonpositive_speed": 157,
+    "excluded_union": 157,
+    "eligible": 25258
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.4.4",
+    "pandas": "3.0.1"
+  },
+  "timing_note": "Single fit and median prediction wall-clock seconds, including Python/C++ conversion; machine-dependent.",
+  "splits": {
+    "random_row_diagnostic": {
+      "counts": {
+        "train": 15154,
+        "validation": 5051,
+        "test": 5053
+      },
+      "identifier_overlaps": {
+        "ROADNAME": {
+          "train_validation": 1167,
+          "train_test": 1164,
+          "validation_test": 997
+        },
+        "NID": {
+          "train_validation": 461,
+          "train_test": 469,
+          "validation_test": 237
+        }
+      },
+      "models": {
+        "A": {
+          "features": [
+            "SEGMENT_LENGTH_KM"
+          ],
+          "intercept": -122.69191234427035,
+          "coefficients": {
+            "SEGMENT_LENGTH_KM": 1746.9321390944822
+          },
+          "unit_column_condition_number": 1.6978456198568992,
+          "training_seconds": 0.000351199999840901,
+          "partitions": {
+            "train": {
+              "n": 15154,
+              "mae": 119.92890037958608,
+              "rmse": 197.95741576646518,
+              "r2": 0.9964205215352766,
+              "residual_mean": 6.145721094202709e-14,
+              "residual_median": 57.846318231792736,
+              "residual_p05": -292.8079207845848,
+              "residual_p95": 121.19762220634524,
+              "residual_max_abs": 11341.818898785918,
+              "prediction_seconds_median": 6.630000007135095e-05
+            },
+            "validation": {
+              "n": 5051,
+              "mae": 117.18686422977801,
+              "rmse": 182.32155334317278,
+              "r2": 0.9970526367688792,
+              "residual_mean": 4.841360486781593,
+              "residual_median": 61.289687508172165,
+              "residual_p05": -287.9598366486857,
+              "residual_p95": 121.23175855596348,
+              "residual_max_abs": 5174.142806619238,
+              "prediction_seconds_median": 2.029999996011611e-05
+            },
+            "test": {
+              "n": 5053,
+              "mae": 118.88697923942749,
+              "rmse": 181.76672774754076,
+              "r2": 0.9973016052870626,
+              "residual_mean": 1.7155836919411922,
+              "residual_median": 57.32635980155692,
+              "residual_p05": -275.01178850186295,
+              "residual_p95": 121.38003834568772,
+              "residual_max_abs": 4640.290695647811,
+              "prediction_seconds_median": 1.9999999949504854e-05
+            }
+          }
+        },
+        "B": {
+          "features": [
+            "SEGMENT_LENGTH_KM",
+            "SPEEDLIMIT"
+          ],
+          "intercept": 106.77612471575284,
+          "coefficients": {
+            "SEGMENT_LENGTH_KM": 1756.6972100604432,
+            "SPEEDLIMIT": -2.988289596181782
+          },
+          "unit_column_condition_number": 7.529154307126025,
+          "training_seconds": 0.002982800000154384,
+          "partitions": {
+            "train": {
+              "n": 15154,
+              "mae": 103.96164474502403,
+              "rmse": 185.17784773082377,
+              "r2": 0.9968677655146062,
+              "residual_mean": 2.938086804043331e-11,
+              "residual_median": 20.172180907724396,
+              "residual_p05": -269.3461980100042,
+              "residual_p95": 171.3511017097234,
+              "residual_max_abs": 10367.03628562577,
+              "prediction_seconds_median": 0.000812599999790109
+            },
+            "validation": {
+              "n": 5051,
+              "mae": 103.22225881646956,
+              "rmse": 174.45945462852828,
+              "r2": 0.9973013494087994,
+              "residual_mean": 5.8769657276456995,
+              "residual_median": 23.9997240043416,
+              "residual_p05": -258.51903408448334,
+              "residual_p95": 173.07356223665857,
+              "residual_max_abs": 4844.528667109167,
+              "prediction_seconds_median": 0.000314899999921181
+            },
+            "test": {
+              "n": 5053,
+              "mae": 103.11986218106799,
+              "rmse": 169.85317770726908,
+              "r2": 0.9976437354353156,
+              "residual_mean": 2.4110560008426485,
+              "residual_median": 21.80072426656662,
+              "residual_p05": -249.4016563647572,
+              "residual_p95": 170.52739282523257,
+              "residual_max_abs": 3988.790521886782,
+              "prediction_seconds_median": 0.000252599999839731
+            }
+          }
+        },
+        "C": {
+          "features": [
+            "SEGMENT_LENGTH_KM",
+            "SPEEDLIMIT",
+            "NBRLANES"
+          ],
+          "intercept": 81.58138442352406,
+          "coefficients": {
+            "SEGMENT_LENGTH_KM": 1756.729465147382,
+            "SPEEDLIMIT": -2.9797890310866526,
+            "NBRLANES": 12.1489387472808
+          },
+          "unit_column_condition_number": 18.761066129197577,
+          "training_seconds": 0.003629400000136229,
+          "partitions": {
+            "train": {
+              "n": 15154,
+              "mae": 103.69562663461834,
+              "rmse": 185.14430786735548,
+              "r2": 0.9968689000477525,
+              "residual_mean": 3.527499867734209e-11,
+              "residual_median": 17.27758397935702,
+              "residual_p05": -269.3259175961564,
+              "residual_p95": 171.5418400405096,
+              "residual_max_abs": 10364.001596921851,
+              "prediction_seconds_median": 0.0008910000001378648
+            },
+            "validation": {
+              "n": 5051,
+              "mae": 103.03858339967796,
+              "rmse": 174.45413322816998,
+              "r2": 0.9973015140359472,
+              "residual_mean": 5.860391576956014,
+              "residual_median": 22.937129930642186,
+              "residual_p05": -258.59894865380124,
+              "residual_p95": 173.25079285909283,
+              "residual_max_abs": 4843.625039744242,
+              "prediction_seconds_median": 0.00024930000017775455
+            },
+            "test": {
+              "n": 5053,
+              "mae": 102.85659305940219,
+              "rmse": 169.8157971839451,
+              "r2": 0.9976447724334072,
+              "residual_mean": 2.4094832420335597,
+              "residual_median": 19.326570841482578,
+              "residual_p05": -249.7325861055331,
+              "residual_p95": 170.36862339649068,
+              "residual_max_abs": 3986.8236700910784,
+              "prediction_seconds_median": 0.00024549999989176285
+            }
+          }
+        }
+      }
+    },
+    "connected_group": {
+      "counts": {
+        "train": 15170,
+        "validation": 5042,
+        "test": 5046
+      },
+      "identifier_overlaps": {
+        "ROADNAME": {
+          "train_validation": 0,
+          "train_test": 0,
+          "validation_test": 0
+        },
+        "NID": {
+          "train_validation": 0,
+          "train_test": 0,
+          "validation_test": 0
+        }
+      },
+      "models": {
+        "A": {
+          "features": [
+            "SEGMENT_LENGTH_KM"
+          ],
+          "intercept": -101.31855458037398,
+          "coefficients": {
+            "SEGMENT_LENGTH_KM": 1728.0530326913502
+          },
+          "unit_column_condition_number": 1.7342610119008433,
+          "training_seconds": 7.850000019971048e-05,
+          "partitions": {
+            "train": {
+              "n": 15170,
+              "mae": 104.6491984426907,
+              "rmse": 171.67366071893775,
+              "r2": 0.9970058834621004,
+              "residual_mean": 1.1463110545747125e-13,
+              "residual_median": 51.04469951257539,
+              "residual_p05": -259.9083755695851,
+              "residual_p95": 100.64522979593839,
+              "residual_max_abs": 5897.032841375956,
+              "prediction_seconds_median": 5.1699999858101364e-05
+            },
+            "validation": {
+              "n": 5042,
+              "mae": 101.34963916948442,
+              "rmse": 143.92669785781166,
+              "r2": 0.9977200640326871,
+              "residual_mean": -6.68047511431542,
+              "residual_median": 48.36935109746656,
+              "residual_p05": -234.92359526475093,
+              "residual_p95": 100.62795862054449,
+              "residual_max_abs": 2840.233520465714,
+              "prediction_seconds_median": 1.8000000181928044e-05
+            },
+            "test": {
+              "n": 5046,
+              "mae": 113.54172144225795,
+              "rmse": 278.7014474150994,
+              "r2": 0.9956190117216582,
+              "residual_mean": 5.450921851980378,
+              "residual_median": 46.10478441032501,
+              "residual_p05": -270.30017045792977,
+              "residual_p95": 102.5477596531089,
+              "residual_max_abs": 13223.57274109614,
+              "prediction_seconds_median": 1.8199999885837315e-05
+            }
+          }
+        },
+        "B": {
+          "features": [
+            "SEGMENT_LENGTH_KM",
+            "SPEEDLIMIT"
+          ],
+          "intercept": 96.52487995398984,
+          "coefficients": {
+            "SEGMENT_LENGTH_KM": 1736.8823767192387,
+            "SPEEDLIMIT": -2.5781247700419034
+          },
+          "unit_column_condition_number": 7.737081972392445,
+          "training_seconds": 0.003087100000357168,
+          "partitions": {
+            "train": {
+              "n": 15170,
+              "mae": 92.37545155796101,
+              "rmse": 161.23401056519765,
+              "r2": 0.9973589618313294,
+              "residual_mean": -1.9565946929004526e-11,
+              "residual_median": 17.195631928219996,
+              "residual_p05": -239.0157855568777,
+              "residual_p95": 146.44475142288582,
+              "residual_max_abs": 5307.692797756899,
+              "prediction_seconds_median": 0.0006823000003350899
+            },
+            "validation": {
+              "n": 5042,
+              "mae": 84.6012794853252,
+              "rmse": 134.4414051386534,
+              "r2": 0.9980106737519034,
+              "residual_mean": -10.22939309938092,
+              "residual_median": 6.328689762790447,
+              "residual_p05": -209.66810128273266,
+              "residual_p95": 141.16730639591762,
+              "residual_max_abs": 2274.4148493369576,
+              "prediction_seconds_median": 0.0002131000001099892
+            },
+            "test": {
+              "n": 5046,
+              "mae": 102.02645592639385,
+              "rmse": 262.03158163759275,
+              "r2": 0.9961274153528246,
+              "residual_mean": 9.009119003698437,
+              "residual_median": 19.102373835970667,
+              "residual_p05": -250.4649944634332,
+              "residual_p95": 152.66158026636023,
+              "residual_max_abs": 12341.928434089787,
+              "prediction_seconds_median": 0.0002092999998239975
+            }
+          }
+        },
+        "C": {
+          "features": [
+            "SEGMENT_LENGTH_KM",
+            "SPEEDLIMIT",
+            "NBRLANES"
+          ],
+          "intercept": 74.06503179209344,
+          "coefficients": {
+            "SEGMENT_LENGTH_KM": 1736.915287279868,
+            "SPEEDLIMIT": -2.568018378089378,
+            "NBRLANES": 10.70824869276124
+          },
+          "unit_column_condition_number": 19.525202019062014,
+          "training_seconds": 0.003086700000039855,
+          "partitions": {
+            "train": {
+              "n": 15170,
+              "mae": 92.16891297497837,
+              "rmse": 161.20586040649638,
+              "r2": 0.9973598839587795,
+              "residual_mean": -2.265427198356795e-11,
+              "residual_median": 15.854892313845852,
+              "residual_p05": -239.12139572741674,
+              "residual_p95": 146.51971326790311,
+              "residual_max_abs": 5305.699592222474,
+              "prediction_seconds_median": 0.0006619999999202264
+            },
+            "validation": {
+              "n": 5042,
+              "mae": 84.355982263661,
+              "rmse": 134.40376792558308,
+              "r2": 0.9980117874298718,
+              "residual_mean": -10.04608417246768,
+              "residual_median": 5.379508977680975,
+              "residual_p05": -209.7155812191684,
+              "residual_p95": 141.38562799954815,
+              "residual_max_abs": 2272.509317536038,
+              "prediction_seconds_median": 0.00020859999995082035
+            },
+            "test": {
+              "n": 5046,
+              "mae": 101.92488372624442,
+              "rmse": 261.99647092053965,
+              "r2": 0.9961284530912026,
+              "residual_mean": 9.00092639012611,
+              "residual_median": 17.22958882087812,
+              "residual_p05": -250.49135954472467,
+              "residual_p95": 152.69084446625575,
+              "residual_max_abs": 12338.845691535156,
+              "prediction_seconds_median": 0.00022840000019641593
+            }
+          }
+        }
+      }
+    }
+  }
+}
