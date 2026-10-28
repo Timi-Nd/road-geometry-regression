@@ -66,9 +66,10 @@ sample; it is not a guaranteed 90% interval. See the
 - A fresh Windows MSVC extension build, standalone C++ suite with warnings
   treated as errors, and **32 Python tests** passed. The dashboard was checked
   in a browser. Experiment outputs were separately reproduced and checked.
-- Ubuntu has **not** been verified: the local WSL startup probe stalled, and
-  the configured CI workflow has not yet been observed running. Do not treat
-  the workflow definition as a passed Linux build.
+- An Ubuntu CI run built the extension and passed the standalone C++ tests,
+  but failed two Python tests on a dataset hash mismatch. A checkout
+  line-ending fix has been tested locally; a passing Ubuntu run has not yet
+  been observed.
 - A follow-up public metadata check found that the current
   [HIGHWAY_OFFICIAL layer](https://services3.arcgis.com/zcv98lgAl8xQ04cW/arcgis/rest/services/HIGHWAY_OFFICIAL/FeatureServer/0?f=pjson)
   declares Web Mercator (3857) and a `Shape__Length` field in projected

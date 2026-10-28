@@ -1,0 +1,4 @@
+# Saved experiment hashes describe CRLF checkout bytes, independent of OS.
+data/road_segments.csv text eol=crlf
+config/model_comparison.json text eol=crlf
+config/imputation.json text eol=crlf

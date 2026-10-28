@@ -110,10 +110,10 @@ python -m unittest discover -s tests -p "test_*.py" -v
 On Windows, use a Visual Studio x64 developer prompt. Ubuntu also needs a
 compiler and Python development headers; the [README](../README.md#optional-build-and-test-on-ubuntu)
 gives the standalone C++ test command. The Windows MSVC build and 32 Python
-tests passed in the documented run. Ubuntu execution was not
-verified locally because WSL startup stalled; the
-[Ubuntu workflow](../.github/workflows/tests.yml) is configured but its
-execution has not been verified here.
+tests passed in the earlier documented run. An
+[Ubuntu workflow](../.github/workflows/tests.yml) run built the extension and
+passed the standalone C++ tests, but failed two Python tests on a dataset hash
+mismatch. The checkout line-ending fix has not yet been verified in Ubuntu CI.
 
 Commands below write outputs to the named directories; existing files with
 those output names are overwritten:
@@ -133,6 +133,12 @@ input snapshot and compatible dependencies; packages are not pinned, and
 timings vary between runs. The dashboard loads ECharts from a CDN and needs
 browser internet access. Generated predictions and imputed estimates are
 stored separately from the input CSV.
+
+The saved dataset and configuration SHA-256 values are hashes of exact file
+bytes, including line endings. The repository's `.gitattributes` requests
+CRLF checkout endings for those inputs on every platform, matching the saved
+experiment hashes. Copies with different line endings will have different
+hashes even when their contents look identical.
 
 ## Data, models and findings
 

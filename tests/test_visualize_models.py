@@ -1,6 +1,8 @@
 """Verify dashboard input checks, chart data and generated HTML."""
 
 import importlib.util
+import hashlib
+import json
 import shutil
 import sys
 import tempfile
@@ -19,6 +21,22 @@ spec.loader.exec_module(visual)
 
 
 class VisualizationTests(unittest.TestCase):
+    def test_saved_experiment_input_hashes_match_checkout(self):
+        cases = (
+            ("model_comparison", "model_comparison.json", "model_comparison.json"),
+            ("imputation", "imputation_report.json", "imputation.json"),
+        )
+        dataset = ROOT / "data" / "road_segments.csv"
+        dataset_hash = hashlib.sha256(dataset.read_bytes()).hexdigest()
+        for result_dir, report_name, config_name in cases:
+            with self.subTest(experiment=result_dir):
+                report_path = ROOT / "results" / result_dir / report_name
+                report = json.loads(report_path.read_text(encoding="utf-8"))
+                config = ROOT / "config" / config_name
+                config_hash = hashlib.sha256(config.read_bytes()).hexdigest()
+                self.assertEqual(report["dataset_sha256"], dataset_hash)
+                self.assertEqual(report["config_sha256"], config_hash)
+
     def test_coordinate_validation(self):
         self.assertEqual(visual.first_coordinate('{"paths":[[[1,2],[3,4]]]}'), (1, 2))
         for value in ("", "bad", "null", '{"paths":[]}', '{"paths":[[[true,2]]]}',

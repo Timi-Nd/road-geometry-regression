@@ -150,8 +150,9 @@ through least-squares solutions rather than a separate public matrix API.
 Some visualization tests use the checked-in dataset and saved experiment files.
 The [Ubuntu CI workflow](.github/workflows/tests.yml) is configured to run
 these build and test commands on pushes, pull requests, and manual dispatch;
-its execution has not been verified. The Windows build and tests passed in
-the documented run.
+an Ubuntu run built the extension and passed the standalone C++ tests, but
+failed two Python tests on a dataset hash mismatch. The checkout line-ending
+fix has been tested locally, but has not yet been verified by Ubuntu CI.
 
 ## Interactive model comparison
 
