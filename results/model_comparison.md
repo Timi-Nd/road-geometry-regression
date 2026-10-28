@@ -9,7 +9,7 @@ specified before this experiment in
 the field semantics described in the
 [dataset investigation](dataset_investigation.md). Earlier full-dataset
 descriptive exploration included target correlations, so this is not a
-strictly untouched test set in the broad research-history sense. We did not
+strictly untouched test set in the broad research-history sense. I did not
 change the feature sets or choose a model based on the test scores below.
 
 To reproduce the results optionally, build the existing C++ extension from
@@ -47,7 +47,7 @@ This run used Python 3.14.6, NumPy 2.4.4 and pandas 3.0.1 on Windows.
 
 ## Eligibility, features and splits
 
-We excluded the 157 rows with nonpositive `SPEEDLIMIT` for **all** models
+I excluded the 157 rows with nonpositive `SPEEDLIMIT` for **all** models
 because the meaning of the observed zeros is unconfirmed. This is a
 conservative experimental policy, not a finding that they are missing.
 No rows had non-finite required fields or missing `ROADNAME`/`NID`; 25,258

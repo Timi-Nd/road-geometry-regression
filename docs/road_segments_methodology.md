@@ -5,15 +5,15 @@
 **Snapshot documented:** 21 October 2026  
 **Geographic scope:** Saskatchewan's **provincial highway network**; this is a Saskatchewan-wide project, **not** a Saskatoon-only project. It does not yet cover every municipal or rural road in the province.
 
-> **What this document is:** A reconstruction of the documented workflow, checked against the saved workbook, exported CSV, and the Ministry's original shapefile. It is **not** a claim that we possess the complete original ETL script or its execution logs. Exact source-download settings, any unpublished intermediate code, and the source layer's effective date require further documentation.
+> **What this document is:** A reconstruction of the documented workflow, checked against the saved workbook, exported CSV, and the Ministry's original shapefile. It is **not** a claim that I possess the complete original ETL script or its execution logs. Exact source-download settings, any unpublished intermediate code, and the source layer's effective date require further documentation.
 
 > **Dataset included here:** The analysis uses `data/road_segments.csv`, a project-prepared snapshot assembled from multiple sources for learning and exploration. The original Ministry-supplied archive and shapefile are **not included** in this repository. The preparation described below includes surface attributes derived from that source.
 
 > **Reuse:** The source terms and permissions applicable to sharing this prepared snapshot, including derived attributes, have not been confirmed; an educational purpose alone does not establish them.
 
-## 1. Why we built this dataset
+## 1. Why I built this dataset
 
-The research started with a practical question: *Why do some Saskatchewan roads deteriorate faster than others, and can we predict when they will need maintenance?*
+The research started with a practical question: *Why do some Saskatchewan roads deteriorate faster than others, and can I predict when they will need maintenance?*
 
 The original research motivation included historical road condition, traffic, maintenance and environmental factors, and the possibility of estimating maintenance needs **1, 3, and 5 years** ahead. This showcase does not make those predictions.
 
@@ -28,7 +28,7 @@ The original project reflection is not included as a linked external resource; t
 | **`HIGHWAY_OFFICIAL`** | Government of Saskatchewan / Saskatchewan GeoHub | Provincial/national highway segments, kilometer references, road identifiers, attributes and geometry | Imported as the foundation |
 | **`highways_surfType.zip`** | Saskatchewan Ministry of Highways; sent directly in response to a data request, **14 Oct 2026** | GIS line features with official highway surface classes and kilometre intervals | Used in preparation **21 Oct 2026**; original archive not included |
 | Official surface-type map and public metadata | Government of Saskatchewan | Surface-class definitions and background documentation | Reference material |
-| Original working workbook | Our working data preparation | Formula-linked cleaned records, mapping decisions, integration QA | Preserved separately; not needed to use the project CSV |
+| Original working workbook | My working data preparation | Formula-linked cleaned records, mapping decisions, integration QA | Preserved separately; not needed to use the project CSV |
 
 **Original network references:**
 
@@ -39,7 +39,7 @@ The original project reflection is not included as a linked external resource; t
 
 `HIGHWAY_OFFICIAL` is based on a **linear referencing system (LRS)**: `ROADNAME` identifies a highway/control-section alignment, while `KM_FROM` and `KM_TO` describe a section along it. The network also contains `NID` identifiers and other roadway attributes. These kilometre references were especially useful when joining the two sources.
 
-**Source-date distinction:** The Ministry archive was *received* on 14 Oct 2026. Its ZIP members have modification timestamps around 7–8 Oct 2026. **Neither date establishes when the road surface conditions were surveyed or became effective.** We deliberately left `SURFACE_SOURCE_YEAR` blank rather than labeling the classification as “2026” without confirmation.
+**Source-date distinction:** The Ministry archive was *received* on 14 Oct 2026. Its ZIP members have modification timestamps around 7–8 Oct 2026. **Neither date establishes when the road surface conditions were surveyed or became effective.** I deliberately left `SURFACE_SOURCE_YEAR` blank rather than labeling the classification as “2026” without confirmation.
 
 ## 3. Timeline
 
@@ -58,9 +58,9 @@ The original project reflection is not included as a linked external resource; t
 
 ### 4.1 Import and preservation
 
-The initial working source was the provincial highway layer, **`HIGHWAY_OFFICIAL`**. In our original workbook, the full network was retained in `Highway_Official_Road_Network` (now renamed **`90_Raw_Road_Network`**). Its underlying columns include official identifiers, road and route attributes, pavement codes, linear-reference kilometre ranges, and spatial geometry.
+The initial working source was the provincial highway layer, **`HIGHWAY_OFFICIAL`**. In my original workbook, the full network was retained in `Highway_Official_Road_Network` (now renamed **`90_Raw_Road_Network`**). Its underlying columns include official identifiers, road and route attributes, pavement codes, linear-reference kilometre ranges, and spatial geometry.
 
-The original source tab was **not overwritten** by our surface classification work. This matters because it allows us to revisit our cleaning and matching decisions later.
+The original source tab was **not overwritten** by my surface classification work. This matters because it allows me to revisit my cleaning and matching decisions later.
 
 ### 4.2 Cleaned, formula-linked view
 
@@ -90,13 +90,13 @@ In the exported CSV, this arithmetic matches the saved values to floating-point 
 
 ### 4.3 Preliminary gravel classification
 
-Before the Ministry supplied the GIS layer, we could identify some gravel roads directly from the original network fields:
+Before the Ministry supplied the GIS layer, I could identify some gravel roads directly from the original network fields:
 
 ```text
 PAVSTATUS = 2  AND  UNPAVSURF = 1  →  Gravel
 ```
 
-This produced **2,562 provisional gravel classifications** as of 30 Sep 2026. We did **not** infer Asphalt, Granular Paved, TMS, or Winter Ice Road for all other segments from those two fields. They were left blank until the underlying official surface layer was received.
+This produced **2,562 provisional gravel classifications** as of 30 Sep 2026. I did **not** infer Asphalt, Granular Paved, TMS, or Winter Ice Road for all other segments from those two fields. They were left blank until the underlying official surface layer was received.
 
 This provisional step explains why the later Ministry data could disagree with the original gravel-coded fields. It was a preliminary direct attribute classification, not an independently surveyed surface inventory.
 
@@ -116,9 +116,9 @@ The archive `highways_surfType.zip` contains the standard shapefile components, 
 | `SURFACETYP` | Official surface classification code |
 | Projection in the shapefile `.prj` | **NAD83 / UTM Zone 13 North**, projected in **metres** |
 
-**Official source codes used in our integration:**
+**Official source codes used in my integration:**
 
-| `SURFACETYP` | `SURFACE_TYPE` in our table | Number of *source shapefile features* |
+| `SURFACETYP` | `SURFACE_TYPE` in my table | Number of *source shapefile features* |
 |---|---|---:|
 | `AC` | Asphalt (AC Paved) | 2,044 |
 | `TMS` | Thin Membrane Surface (TMS) | 764 |
@@ -129,9 +129,9 @@ The archive `highways_surfType.zip` contains the standard shapefile components, 
 
 These counts describe **source GIS features**, not final road-network rows. One source interval can overlap many shorter road-network segments, so the final per-class segment counts are different.
 
-## 6. How we integrated the datasets
+## 6. How I integrated the datasets
 
-### 6.1 Why we used a road-and-kilometre join
+### 6.1 Why I used a road-and-kilometre join
 
 The two datasets divide the highway system into **different lengths of road sections**. A row-by-row positional join would be incorrect. Instead, the integration matched:
 
@@ -145,13 +145,13 @@ The fundamental interval-overlap calculation is:
 overlap_km = max(0, min(KM_TO, TOKM) - max(KM_FROM, FROMKM))
 ```
 
-For each base segment, we evaluated matching source intervals, how much of the base segment they covered, and whether one government surface class clearly dominated. The saved output records **matched coverage percentage** (`SURFACE_MATCH_PCT`) and **dominant-class percentage** (`GOV_DOMINANT_PCT`).
+For each base segment, I evaluated matching source intervals, how much of the base segment they covered, and whether one government surface class clearly dominated. The saved output records **matched coverage percentage** (`SURFACE_MATCH_PCT`) and **dominant-class percentage** (`GOV_DOMINANT_PCT`).
 
 > **Reproducibility note:** The original per-row matching script is not retained in the workbook. The calculations above describe the traceable join approach; they are not a verbatim copy of that script. Inspection of the final output shows the accepted Ministry rows have both coverage and dominant-class percentages **at least 99.5%** (allowing for the displayed two-decimal rounding), while the mixed/partial group falls below that standard. Treat **99.5% as the reconstructable acceptance rule**, and confirm it against saved ETL code if that code becomes available. Overlapping GIS intervals, rounding and boundary conditions need deliberate handling in any independent reimplementation.
 
 ### 6.2 Source priority and disagreements
 
-We chose the **directly supplied Ministry surface-type layer as the primary surface classification** when its road/kilometre match was reliable.
+I chose the **directly supplied Ministry surface-type layer as the primary surface classification** when its road/kilometre match was reliable.
 
 - If the new Ministry class agreed with the old pavement attributes, keep that class.
 - If it **disagreed**, use the Ministry class in `SURFACE_TYPE`, while **retaining** the original `PAVSTATUS` and `UNPAVSURF` values.
@@ -179,7 +179,7 @@ This is a **source-precedence policy**, not proof that every value in either sou
 
 **Total schema:** 22 base columns + 11 integration/QA columns = **33 columns**.
 
-## 7. What our validation found
+## 7. What my validation found
 
 All counts below were **recomputed from `data/road_segments.csv`** rather than taken only from the Overview sheet.
 
@@ -209,7 +209,7 @@ Thus **25,035 of 25,415** rows have a final surface class (**98.50%** to two dec
 
 ### 7.3 Disagreement checks
 
-**388** road segments had a reliable government match but were coded as unpaved gravel in the earlier `HIGHWAY_OFFICIAL` pavement fields. We **accepted the Ministry's class** for the main `SURFACE_TYPE` while preserving the discrepancy:
+**388** road segments had a reliable government match but were coded as unpaved gravel in the earlier `HIGHWAY_OFFICIAL` pavement fields. I **accepted the Ministry's class** for the main `SURFACE_TYPE` while preserving the discrepancy:
 
 | Accepted Ministry class | Previously disputed rows |
 |---|---:|

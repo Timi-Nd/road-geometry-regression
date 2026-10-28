@@ -2,7 +2,7 @@
 //
 // For n observations and p features, the desired prediction for row i is
 //   intercept + feature[i][0] * coefficient[0] + ... .
-// We choose coefficients that minimize the sum of squared prediction errors.
+// The solver chooses coefficients that minimize the sum of squared prediction errors.
 // QR solves this least-squares problem without explicitly forming or inverting
 // X-transpose times X, which can magnify numerical errors.
 #include "multiple_regression.h"
